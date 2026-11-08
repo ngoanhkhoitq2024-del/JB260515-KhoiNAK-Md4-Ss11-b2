@@ -8,6 +8,8 @@ import org.springframework.data.redis.serializer.RedisSerializationContext;
 
 import re.edu.medicinestore.dto.MedicineResponse;
 
+import java.time.Duration;
+
 @Configuration
 public class RedisConfig {
 
@@ -18,6 +20,7 @@ public class RedisConfig {
                 new JacksonJsonRedisSerializer<>(MedicineResponse.class);
 
         return RedisCacheConfiguration.defaultCacheConfig()
+                .entryTtl(Duration.ofMinutes(60))
                 .serializeValuesWith(
                         RedisSerializationContext.SerializationPair
                                 .fromSerializer(serializer)

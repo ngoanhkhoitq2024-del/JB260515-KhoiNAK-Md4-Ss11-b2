@@ -70,18 +70,13 @@ public class MedicineController {
     public ResponseEntity<ApiResponse<Medicine>> updateMedicine(
             @PathVariable Long id,
             @RequestBody Medicine medicine) {
-
-        Medicine updated = medicineService.updateMedicine(id, medicine);
+        medicine.setId(id);
+        Medicine updatedMedicine = medicineService.updateMedicine(medicine);
 
         return ResponseEntity.ok(
-                new ApiResponse<>(
-                        true,
-                        "Update medicine successfully",
-                        updated
-                )
+                new ApiResponse<>(true, "Update medicine successfully", updatedMedicine)
         );
     }
-
     // DELETE
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> deleteMedicine(

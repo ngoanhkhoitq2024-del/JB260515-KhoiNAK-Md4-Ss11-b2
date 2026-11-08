@@ -1,5 +1,6 @@
 package re.edu.medicinestore.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,5 +26,6 @@ public class Category implements Serializable {
     private String description;
 
     @OneToMany(mappedBy = "category")
+    @JsonIgnore
     private List<Medicine> medicines = new ArrayList<>();
 }

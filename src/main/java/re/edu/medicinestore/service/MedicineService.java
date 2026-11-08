@@ -69,8 +69,11 @@ public class MedicineService {
     }
 
     // Cập nhật thuốc
-    @CacheEvict(value = "medicines", key = "#id")
-    public Medicine updateMedicine(Long id, Medicine medicine) {
+    // Cập nhật thuốc
+    @CacheEvict(value = "medicines", key = "#medicine.id")
+    public Medicine updateMedicine(Medicine medicine) {
+
+        Long id = medicine.getId();
 
         Medicine existing = medicineRepository.findById(id)
                 .orElseThrow(() ->
